@@ -1,0 +1,44 @@
+.main-content {
+  display: flex;
+}
+
+.user-list-wrapper {
+  display: flex;
+  font-family: OpenSymbol, sans-serif;
+  font-size: 1.2em;
+  flex: 1;
+  color: #fff;
+  order: 1;
+  background-color: #ECA33F;
+  padding: 20px 0 40px 30px;
+  border-right: 1px solid black;
+}
+
+.feed-wrapper {
+  font-family: OpenSymbol, sans-serif;
+  font-size: 1.2em;
+  flex: 5;
+  order: 2;
+  overflow-y: scroll;
+  padding: 20px 0 0 24px;
+  background: #ffffff url('https://images.unsplash.com/photo-1506202687253-52e1b29d3527?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80') no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+}
+
+.char-form-wrapper {
+  display: flex;
+  height: 50px;
+  background-color: #eee;
+  z-index: 3;
+}
+
+#scroll-style::-webkit-scrollbar-track
+{
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+app-user-list {
+  width: 100%;
+}

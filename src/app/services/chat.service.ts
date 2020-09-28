@@ -32,22 +32,27 @@ export class ChatService {
   }
 
   sendMessage(msg: string) {
+    console.log('Calling sendMessage');
     const timestamp = this.getTimeStamp();
     // const email = this.user.email;
     const email = 'I AM A TeST';
+
     this.chatMessages = this.getMessages();
-    this.chatMessages.push({
-      email: email,
+    console.log('chat servi' + this.chatMessages);
+    const cm = {
+      email,
       // userName: this.userName,
       userName: 'testuser',
       message: msg,
-      timeSent: timestamp,
-    });
+      timeSent: new Date(timestamp)
+    };
+    this.chatMessages.push([cm, cm]);
 
     console.log('Called send message');
   }
 
   getMessages(): AngularFireList<ChatMessage[]> {
+    console.log('Calling getMessages');
     return this.db.list('/messages', ref => {
       return ref.limitToLast(25).orderByKey();
     });
