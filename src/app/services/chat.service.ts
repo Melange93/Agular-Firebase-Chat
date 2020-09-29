@@ -1,62 +1,82 @@
 import {Injectable} from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
-import {AngularFireAuth} from 'angularfire2/auth';
 import {Observable} from 'rxjs';
-import {AuthService} from './auth.service';
 import {ChatMessage} from '../models/chat.message.model';
-import * as firebase from 'firebase';
-import {auth} from 'firebase';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  user: any;
-  chatMessages: AngularFireList<ChatMessage[]>;
-  chatMessage: ChatMessage;
-  userName: Observable<string>;
+  private basicUrl = environment.basicUrl;
+  private httpOptions = {
+    headers: new HttpHeaders(
+      {'Content-Type': 'application/json'})
+  };
+
+  private user: any;
+  private chatMessages: ChatMessage[];
+  private chatMessage: ChatMessage;
+  private userName: Observable<string>;
 
   constructor(
-    private db: AngularFireDatabase,
-    private afAuth: AngularFireAuth
+    private httpClient: HttpClient,
   ) {
     /*
-    this.afAuth.authState.subscribe(auth => {
-      if (auth !== undefined && auth !== null) {
-        this.user = auth;
-      }
-    });
-
+    set user here
      */
   }
 
+
   sendMessage(msg: string) {
-    console.log('Calling sendMessage');
+    console.log(msg);
     const timestamp = this.getTimeStamp();
     // const email = this.user.email;
-    const email = 'I AM A TeST';
+    const email = 'zest@zest.com';
 
-    this.chatMessages = this.getMessages();
-    console.log('chat servi' + this.chatMessages);
-    const cm = {
-      email,
-      // userName: this.userName,
+    const newChatMassage = {
+      email: email,
       userName: 'testuser',
       message: msg,
-      timeSent: new Date(timestamp)
+      timeStamp: new Date(timestamp)
     };
-    this.chatMessages.push([cm, cm]);
 
-    console.log('Called send message');
+    console.log(newChatMassage);
+    this.httpClient.post<ChatMessage>(this.basicUrl + '/insert-message', newChatMassage, this.httpOptions).toPromise().then();
+
   }
 
-  getMessages(): AngularFireList<ChatMessage[]> {
-    console.log('Calling getMessages');
-    return this.db.list('/messages', ref => {
-      return ref.limitToLast(25).orderByKey();
-    });
+  getMessages(): Promise<ChatMessage[]> {
+    return this.httpClient.get<any>(this.basicUrl + '/messages').toPromise().then(
+      obj => obj);
   }
+
+
+  /*
+  sendMessage(msg: string) {
+    console.log(msg);
+    const timestamp = this.getTimeStamp();
+    // const email = this.user.email;
+    const email = 'zest@zest.com';
+
+    const newChatMassage = {
+      email: email,
+      userName: 'testuser',
+      message: msg,
+      timeStamp: new Date(timestamp)
+    };
+
+    console.log(newChatMassage);
+    this.httpClient.post<ChatMessage>(this.basicUrl + '/insert-message', newChatMassage, this.httpOptions).pipe();
+
+  }
+
+  getMessages(): Observable<ChatMessage[]> {
+    return this.httpClient.get<ChatMessage[]>(this.basicUrl + '/messages').pipe();
+  }
+
+   */
 
   getTimeStamp() {
     const now = new Date();
