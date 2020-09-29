@@ -2,7 +2,7 @@
   <div class="user-list-wrapper">
     <app-user-list></app-user-list>
   </div>
-  <div #scroller class="feed-wrapper">
+  <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="feed-wrapper">
     <app-feed [chatMessages]="chatMessages"></app-feed>
   </div>
 </div>

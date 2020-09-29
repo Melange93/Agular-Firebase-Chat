@@ -19,9 +19,9 @@
   font-size: 1.2em;
   flex: 5;
   order: 2;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 20px 0 0 24px;
-  background: #ffffff url('https://images.unsplash.com/photo-1506202687253-52e1b29d3527?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80') no-repeat center center fixed;
+  background: url('https://images.unsplash.com/photo-1506202687253-52e1b29d3527?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80') no-repeat center center fixed;
   background-size: cover;
   height: 100%;
 }
