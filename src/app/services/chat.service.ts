@@ -29,8 +29,8 @@ export class ChatService {
   }
 
 
-  sendMessage(msg: string): void {
-    console.log(msg);
+  sendMessage(msg: string): Promise<ChatMessage> {
+    //console.log(msg);
     const timestamp = this.getTimeStamp();
     // const email = this.user.email;
     const email = 'zest@zest.com';
@@ -42,12 +42,13 @@ export class ChatService {
       timeStamp: new Date(timestamp)
     };
 
-    this.httpClient.post<ChatMessage>(this.basicUrl + '/insert-message', newChatMassage, this.httpOptions).toPromise().then();
+    return this.httpClient.post<ChatMessage>(this.basicUrl + '/insert-message', newChatMassage, this.httpOptions).toPromise()
+      .then(obj => obj);
   }
 
   getMessages(): Promise<ChatMessage[]> {
-    return this.httpClient.get<any>(this.basicUrl + '/messages').toPromise().then(
-      obj => obj);
+    return this.httpClient.get<any>(this.basicUrl + '/messages').toPromise()
+      .then(obj => obj);
   }
 
 
