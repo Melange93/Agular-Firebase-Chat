@@ -29,7 +29,7 @@ export class ChatService {
   }
 
 
-  sendMessage(msg: string) {
+  sendMessage(msg: string): void {
     console.log(msg);
     const timestamp = this.getTimeStamp();
     // const email = this.user.email;
@@ -42,9 +42,7 @@ export class ChatService {
       timeStamp: new Date(timestamp)
     };
 
-    console.log(newChatMassage);
     this.httpClient.post<ChatMessage>(this.basicUrl + '/insert-message', newChatMassage, this.httpOptions).toPromise().then();
-
   }
 
   getMessages(): Promise<ChatMessage[]> {

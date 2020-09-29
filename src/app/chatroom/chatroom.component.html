@@ -3,10 +3,10 @@
     <app-user-list></app-user-list>
   </div>
   <div #scroller class="feed-wrapper">
-    <app-feed></app-feed>
+    <app-feed [chatMessages]="chatMessages"></app-feed>
   </div>
 </div>
 
 <div class="char-form-wrapper">
-  <app-chat-form></app-chat-form>
+  <app-chat-form (message)="sendMessage($event)"></app-chat-form>
 </div>
