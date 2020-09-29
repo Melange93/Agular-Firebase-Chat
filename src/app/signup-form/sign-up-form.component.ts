@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
+import {error} from 'util';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpFormComponent implements OnInit {
 
-  constructor() { }
+  private email: string;
+  private password: string;
+  private displayName: string;
+  private errorMsg: string;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  signUp() {
+    const email = this.email;
+    const password = this.password;
+    const displayName = this.displayName;
+    /*
+    this.authService.signUp(email, password, displayName)
+      .then(resolve => this.router.navigate(['chat']))
+      .catch(error => this.errorMsg = error.message);
+
+     */
   }
 
 }
