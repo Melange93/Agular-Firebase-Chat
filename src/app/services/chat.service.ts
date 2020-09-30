@@ -11,8 +11,8 @@ export class ChatService {
 
   private basicUrl = environment.basicUrl;
   private httpOptions = {
-    headers: new HttpHeaders(
-      {'Content-Type': 'application/json'})
+    headers: new HttpHeaders({'Content-Type': 'application/json'}),
+    withCredentials: true
   };
 
   private user: any;
@@ -47,7 +47,7 @@ export class ChatService {
   }
 
   getMessages(): Promise<ChatMessage[]> {
-    return this.httpClient.get<any>(this.basicUrl + '/messages').toPromise()
+    return this.httpClient.get<any>(this.basicUrl + '/messages', this.httpOptions).toPromise()
       .then(obj => obj);
   }
 

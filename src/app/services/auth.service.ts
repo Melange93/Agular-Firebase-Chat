@@ -11,11 +11,8 @@ export class AuthService {
 
   private basicUrl = environment.basicUrl;
   private httpOptions = {
-    headers: new HttpHeaders(
-      {
-        'Content-Type': 'application/json',
-      }
-    )
+    headers: new HttpHeaders({'Content-Type': 'application/json'}),
+    withCredentials: true
   };
 
   constructor(
@@ -44,6 +41,6 @@ export class AuthService {
     };
 
     return this.httpClient.post<any>(this.basicUrl + '/login', userLogin, this.httpOptions).toPromise()
-      .then(obj => console.log('Say hi '));
+      .then(obj => console.log(obj));
   }
 }
