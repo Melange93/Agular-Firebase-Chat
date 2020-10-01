@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 
 @Component({
@@ -10,7 +10,6 @@ export class LoginFormComponent implements OnInit {
 
   private username: string;
   private password: string;
-  private errorMsg: string;
 
   constructor(
     private authService: AuthService
@@ -24,8 +23,7 @@ export class LoginFormComponent implements OnInit {
     const username = this.username;
     const password = this.password;
 
-    this.authService.login(username, password)
-      .catch(catchError => this.errorMsg = catchError.message);
+    this.authService.login(username, password);
   }
 
 }

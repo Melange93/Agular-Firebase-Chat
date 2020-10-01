@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {ChatMessage} from '../models/chat.message.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {AuthService} from './auth.service';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,10 @@ export class ChatService {
     private httpClient: HttpClient,
     private authService: AuthService
   ) {
+  }
+
+  getActiveUsers(): Promise<User[]> {
+    return this.authService.getActiveUsers().then(users => users);
   }
 
   sendMessage(msg: string): Promise<ChatMessage> {
