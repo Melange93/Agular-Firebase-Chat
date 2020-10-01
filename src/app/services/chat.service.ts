@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {ChatMessage} from '../models/chat.message.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +16,16 @@ export class ChatService {
     withCredentials: true
   };
 
-  private user: any;
-  private chatMessages: ChatMessage[];
-  private chatMessage: ChatMessage;
-  private userName: Observable<string>;
-
   constructor(
     private httpClient: HttpClient,
+    private authService: AuthService
   ) {
-    /*
-    set user here
-     */
   }
-
 
   sendMessage(msg: string): Promise<ChatMessage> {
     const timestamp = this.getTimeStamp();
     const newChatMassage = {
-      userName: 'testuser',
+      userName: this.authService.authUser().username,
       message: msg,
       timeStamp: new Date(timestamp)
     };

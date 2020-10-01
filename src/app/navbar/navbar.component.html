@@ -3,16 +3,13 @@
   <div id="heading"><a routerLink="/">LeafChat</a></div>
   <div class="links">
     <span>
-      <a *ngIf="!(user|async)?.uid" href="#" (click)="login()">Login</a>
+      <button *ngIf="!user" routerLink="/signup">Sign Up</button>
     </span>
     <span>
-      <a *ngIf="!(user|async)?.uid" routerLink="/signup">Sign Up</a>
+      <span id="user-email" *ngIf="user">Hello, {{user.username}}</span>
     </span>
     <span>
-      <span id="user-email" *ngIf="(user|async)?.uid">Hello, {{userEmail}}</span>
-    </span>
-    <span>
-      <a *ngIf="(user|async)?.uid" href="#" (click)="logout()">Logout</a>
+      <button *ngIf="user" (click)="logout()">Logout</button>
     </span>
   </div>
 </div>

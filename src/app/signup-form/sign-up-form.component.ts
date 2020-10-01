@@ -30,7 +30,7 @@ export class SignUpFormComponent implements OnInit {
     const displayName = this.displayName;
 
     this.authService.signUp(email, password, displayName)
-      .then(resolve => this.router.navigate(['login']))
+      .then(resolve => this.router.navigateByUrl('/login'))
       .catch(catchError => this.errorMsg = catchError.message);
   }
 
