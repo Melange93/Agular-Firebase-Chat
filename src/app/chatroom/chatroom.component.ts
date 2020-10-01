@@ -1,8 +1,6 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {ChatService} from '../services/chat.service';
 import {ChatMessage} from '../models/chat.message.model';
-import {User} from '../models/user.model';
-import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-chatroom',
@@ -10,9 +8,6 @@ import {Observable, Subject} from 'rxjs';
   styleUrls: ['./chatroom.component.css']
 })
 export class ChatroomComponent implements OnInit, DoCheck {
-
-  activeUserList: Observable<User[]>;
-  private newActiveUser = new Subject<string>();
 
   chatMessages: ChatMessage[];
 

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ChatService} from '../services/chat.service';
 
 @Component({
@@ -8,14 +8,15 @@ import {ChatService} from '../services/chat.service';
 })
 export class ChatFormComponent implements OnInit {
 
-  @Output() message = new EventEmitter<string>();
+  message: string;
 
-  constructor() {  }
+  constructor(private chat: ChatService) {  }
 
   ngOnInit() {
   }
 
-  send(message: string) {
-    this.message.emit(message);
+  send() {
+    this.chat.sendMessage(this.message);
+    this.message = '';
   }
 }

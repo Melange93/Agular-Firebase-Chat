@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ChatService} from '../services/chat.service';
-import {AuthService} from '../services/auth.service';
 import {ChatMessage} from '../models/chat.message.model';
 
 @Component({
@@ -14,7 +12,6 @@ export class MessageComponent implements OnInit {
   userName: string;
   messageContent: string;
   timeStamp: Date = new Date();
-  // isOwnMessage: boolean;
 
   constructor() { }
 
