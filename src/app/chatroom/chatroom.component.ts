@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ChatService} from '../services/chat.service';
 import {ChatMessage} from '../models/chat.message.model';
+import {User} from '../models/user.model';
 
 @Component({
   selector: 'app-chatroom',
@@ -9,6 +10,7 @@ import {ChatMessage} from '../models/chat.message.model';
 })
 export class ChatroomComponent implements OnInit {
 
+  activeUserList: User[];
   chatMessages: ChatMessage[];
 
   constructor(

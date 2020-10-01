@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from '../models/user.model';
 import {environment} from '../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -33,14 +33,17 @@ export class AuthService {
 
   }
 
-  login(email: string, password: string) {
+  login(userName: string, password: string) {
 
     const userLogin = {
-      userEmail: email,
+      userName,
       password
     };
 
     return this.httpClient.post<any>(this.basicUrl + '/login', userLogin, this.httpOptions).toPromise()
-      .then(obj => console.log(obj));
+      .then((response: HttpResponse<any>) => {
+        console.log(response);
+        console.log(response.status);
+      });
   }
 }

@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
+import {User} from '../models/user.model';
 
 @Component({
   selector: 'app-login-form',
@@ -9,9 +10,11 @@ import {Router} from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
 
-  private email: string;
+  private username: string;
   private password: string;
   private errorMsg: string;
+
+  @Output() user: User;
 
   constructor(
     private router: Router,
@@ -23,10 +26,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
-    const email = this.email;
+    const username = this.username;
     const password = this.password;
 
-    this.authService.login(email, password)
+    this.authService.login(username, password)
       .then(resolve => this.router.navigate(['chat']))
       .catch(catchError => this.errorMsg = catchError.message);
   }
