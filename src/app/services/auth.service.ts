@@ -15,8 +15,11 @@ export class AuthService {
     withCredentials: true
   };
 
+  private user: User;
+
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private router: Router
   ) {
   }
 
@@ -41,9 +44,24 @@ export class AuthService {
     };
 
     return this.httpClient.post<any>(this.basicUrl + '/login', userLogin, this.httpOptions).toPromise()
-      .then((response: HttpResponse<any>) => {
-        console.log(response);
-        console.log(response.status);
-      });
+      .then(response => {
+        this.user = response;
+        this.setUserStatus('ONLINE');
+        this.router.navigate(['chat']);
+      })
+      .catch(error => console.log(error));
+  }
+
+  setUserStatus(status: string): void {
+    this.user.status = status;
+    const data = {
+      userName: this.user.username,
+      status
+    };
+
+    this.httpClient.put<any>(this.basicUrl + '/update-status', data, this.httpOptions).toPromise()
+      .catch(error => console.log(error));
+
+    console.log(this.user);
   }
 }
