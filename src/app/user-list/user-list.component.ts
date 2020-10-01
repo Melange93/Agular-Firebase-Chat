@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ChatService} from '../services/chat.service';
 
 @Component({
   selector: 'app-user-list',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  activeUsersName: string[];
+
+  constructor(private chat: ChatService) { }
 
   ngOnInit() {
+    this.chat.getActiveUsers()
+      .then(value => this.activeUsersName = value)
+      .catch(error => console.log(error));
   }
 
 }

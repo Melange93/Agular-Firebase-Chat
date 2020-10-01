@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {User} from '../models/user.model';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -90,9 +89,8 @@ export class AuthService {
       .catch(error => error);
   }
 
-  getActiveUsers(): Promise<User[]> {
-    return this.httpClient.get<User[]>(this.basicUrl + '/active-users')
-      .toPromise()
-      .then(users => users);
+  getActiveUsers(): Promise<string[]> {
+    return this.httpClient.get<string[]>(this.basicUrl + '/active-users', this.httpOptions)
+      .toPromise();
   }
 }

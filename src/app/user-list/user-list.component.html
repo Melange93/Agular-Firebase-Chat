@@ -1,7 +1,6 @@
-<!--
 <div class="user-list">
-  <app-user-item
-    [user]=user *ngFor="let user of users">
-  </app-user-item>
+  <div *ngFor="let username of activeUsersName">
+    <app-user-item [username]=username></app-user-item>
+  </div>
 </div>
--->
+
